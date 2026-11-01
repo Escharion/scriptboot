@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b16">
+  <meta name="description" content="YUNIQMA SCRIPTBOOT turns everyday workflow problems into purpose-built software and automation.">
+  <title>YUNIQMA / SCRIPTBOOT — Software built around your problem</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#" aria-label="YUNIQMA SCRIPTBOOT home" onclick="showTab('docs');return false;">
+        <div class="mark">YQ</div><div class="brandname">YUNIQMA<span>S C R I P T B O O T</span></div>
+      </a>
+      <nav class="tabs" aria-label="Main navigation">
+        <button class="tab active" id="tab-docs" role="tab" aria-selected="true" aria-controls="docs" onclick="showTab('docs')">01 / Discover</button>
+        <button class="tab" id="tab-request" role="tab" aria-selected="false" aria-controls="request" onclick="showTab('request')">02 / Request a tool</button>
+      </nav>
+      <button class="nav-cta" onclick="showTab('request')">Start a request ↗</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="view active" id="docs" role="tabpanel" aria-labelledby="tab-docs">
+      <div class="hero">
+        <div>
+          <div class="eyebrow">A smarter way to get software</div>
+          <h1>Your problem.<br><span class="gradient">Our next build.</span></h1>
+          <p>YUNIQMA SCRIPTBOOT turns everyday frustrations into practical digital tools. Tell us what slows you down, what you wish your computer could do, or what process needs fixing. We work with you to shape a solution around your situation.</p>
+          <div class="actions">
+            <button class="btn btn-primary" onclick="showTab('request')">Describe your situation <span>↗</span></button>
+            <a class="btn btn-secondary" href="#how-it-works">See how it works ↓</a>
+          </div>
+        </div>
+        <div class="visual" aria-label="Abstract software interface illustration">
+          <div class="orbit"></div>
+          <div class="core-card">
+            <div class="core-head"><span>Scriptboot / workspace</span><span><i class="live-dot"></i>ready</span></div>
+            <div class="terminal"><span class="purple">&gt; problem.detected</span><br><b>workflow:</b> repetitive_task<br><b>input:</b> your everyday challenge<br><span class="green">&gt; solution.design()</span><br><span class="green">&gt; automation = possible</span><br><span class="purple">&gt; waiting_for_your_idea_</span></div>
+            <div class="core-foot"><span>BUILD STATUS</span><span>IDEA → TOOL</span></div><div class="progress"><span></span></div>
+            <div class="core-foot"><span>Human-led. Problem-first.</span><span>v1.0</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>Built around your workflow</strong><span>Not a random script catalogue.</span></div>
+        <div class="metric"><strong>Direct human conversation</strong><span>Discuss the problem before the build.</span></div>
+        <div class="metric"><strong>Practical digital tools</strong><span>Automation, utilities and custom software.</span></div>
+      </div>
+
+      <div class="section-head">
+        <div class="eyebrow">What SCRIPTBOOT does</div>
+        <h2>Software should fit the way you work.</h2>
+        <p>We focus on useful tools that reduce repetitive work, organise information and make everyday processes easier to manage.</p>
+      </div>
+      <div class="grid3">
+        <article class="feature"><div class="icon">⌘</div><h3>Task automation</h3><p>Turn repeated computer tasks into workflows that run with fewer manual steps.</p></article>
+        <article class="feature"><div class="icon">▦</div><h3>Business utilities</h3><p>Organise stock, sales, records, reports, customer requests and everyday operations.</p></article>
+        <article class="feature"><div class="icon">⌁</div><h3>Data handling</h3><p>Clean, transform, compare and organise files or information into useful outputs.</p></article>
+        <article class="feature"><div class="icon">◈</div><h3>Custom desktop tools</h3><p>Purpose-built applications for a particular role, process or working environment.</p></article>
+        <article class="feature"><div class="icon">⌘</div><h3>Web-connected systems</h3><p>Dashboards, forms and lightweight systems that connect people to useful services.</p></article>
+        <article class="feature"><div class="icon">⚙</div><h3>Existing workflow upgrades</h3><p>Improve a process you already use instead of forcing you into a whole new system.</p></article>
+      </div>
+
+      <div class="process" id="how-it-works">
+        <div class="eyebrow">From challenge to working tool</div>
+        <div class="section-head" style="margin-bottom:0"><h2>A clear path. No guesswork.</h2><p>You explain the situation. We discuss what makes sense before any development begins.</p></div>
+        <div class="steps">
+          <div class="step"><div class="step-num">STEP 01</div><h3>Tell us what is happening</h3><p>Describe the task, problem or idea in your own words.</p></div>
+          <div class="step"><div class="step-num">STEP 02</div><h3>We discuss the solution</h3><p>We ask questions, understand the workflow and check what is technically practical.</p></div>
+          <div class="step"><div class="step-num">STEP 03</div><h3>Scope and agree</h3><p>We discuss features, timeline, price and delivery before work starts.</p></div>
+          <div class="step"><div class="step-num">STEP 04</div><h3>Build and refine</h3><p>The agreed tool is developed, tested and handed over with usage guidance.</p></div>
+        </div>
+        <div class="note"><strong>Good to know:</strong> Sending a request is free and does not commit you to buying anything. We will discuss feasibility and agree on the scope before development or payment.</div>
+      </div>
+      <div class="actions" style="justify-content:center;margin-top:34px"><button class="btn btn-primary" onclick="showTab('request')">I have a problem to solve ↗</button></div>
+    </section>
+
+    <section class="view" id="request" role="tabpanel" aria-labelledby="tab-request">
+      <div class="request-intro">
+        <div class="eyebrow">Your idea starts here</div>
+        <h1>What should your<br><span class="gradient">computer do for you?</span></h1>
+        <p>Don't worry about technical language. Describe what is happening, what you want to happen instead, and where the difficulty is. We'll take it from there.</p>
+      </div>
+      <div class="request-layout">
+        <aside class="side-panel">
+          <h2>Start with the situation.</h2>
+          <p>A useful request does not need to be perfectly written. A real example is enough to begin.</p>
+          <div class="side-item"><div class="icon">01</div><div><strong>Explain the problem</strong><span>What takes too long, keeps going wrong or needs organising?</span></div></div>
+          <div class="side-item"><div class="icon">02</div><div><strong>Describe the outcome</strong><span>What would a successful solution do for you?</span></div></div>
+          <div class="side-item"><div class="icon">03</div><div><strong>Continue on WhatsApp</strong><span>Your request opens as a prepared message for you to review and send.</span></div></div>
+          <div class="note"><strong>Our approach</strong><br>Understand first. Recommend second. Build only when the solution makes sense.</div>
+        </aside>
+        <form class="form-panel" id="requestForm">
+          <h2>Tool request brief</h2>
+          <p class="sub">Fields marked * are required. Your details will be placed into a WhatsApp message.</p>
+          <div class="form-grid">
+            <div class="field"><label for="category">What kind of help do you need? *</label><select id="category" name="category" required><option value="" disabled selected>Select a category</option><option>Business or office automation</option><option>Data processing and reports</option><option>Stock, sales or customer management</option><option>Computer or IT utility</option><option>Website or web-connected tool</option><option>Personal productivity</option><option>Other / not sure yet</option></select></div>
+            <div class="field"><label for="platform">Where should it work?</label><select id="platform" name="platform"><option value="Not sure yet">Not sure yet</option><option>Windows computer</option><option>Linux computer</option><option>Mac computer</option><option>Website / browser</option><option>Android phone</option><option>Multiple platforms</option></select></div>
+            <div class="field full"><label for="problem">Describe your situation *</label><textarea id="problem" name="problem" placeholder="What are you trying to do? What is difficult, repetitive or not working? Give us a real example if possible..." required minlength="15" maxlength="3000"></textarea><span class="hint">A few sentences are perfect. Please do not include passwords, PINs or private customer information.</span></div>
+            <div class="field full"><label for="outcome">What would you like the tool to do?</label><textarea id="outcome" name="outcome" placeholder="For example: save the records, calculate totals and create a report..." maxlength="1500" style="min-height:95px"></textarea></div>
+            <div class="field"><label for="budget">Estimated budget (optional)</label><select id="budget" name="budget"><option value="Not specified">Prefer to discuss</option><option>Under GH₵100</option><option>GH₵100–300</option><option>GH₵300–700</option><option>GH₵700–1,500</option><option>GH₵1,500+</option></select></div>
+            <div class="field"><label for="timing">When do you need it?</label><select id="timing" name="timing"><option>Flexible / discuss together</option><option>As soon as practical</option><option>Within 1–2 weeks</option><option>Within a month</option><option>Just exploring an idea</option></select></div>
+            <div class="field full"><label for="extra">Anything else we should know? (optional)</label><input id="extra" name="extra" placeholder="Business type, number of users, existing software, etc." maxlength="500"></div>
+          </div>
+          <label class="consent"><input type="checkbox" id="consent" required><span>I understand that this form prepares a message to YUNIQMA SCRIPTBOOT on WhatsApp. I will review and send the message myself. I will not include passwords, payment PINs or sensitive personal data.</span></label>
+          <div class="send-row"><button class="btn btn-primary" type="submit">Prepare WhatsApp request <span>↗</span></button><span class="status" id="formStatus" aria-live="polite">No payment or commitment is required to send an enquiry.</span></div>
+          <div class="form-foot">When you press the button, WhatsApp will open with your request filled in. You must press <strong>Send</strong> inside WhatsApp for us to receive it. If WhatsApp is unavailable, you can copy the prepared message instead.</div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="shell footer-inner"><div><div class="footer-brand">YUNIQMA / SCRIPTBOOT</div><div>Useful software. Built around real problems.</div></div><div>© <span id="year"></span> YUNIQMA. All rights reserved.</div></div></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
