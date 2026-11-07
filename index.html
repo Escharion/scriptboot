@@ -16,7 +16,8 @@
       </a>
       <nav class="tabs" aria-label="Main navigation">
         <button class="tab active" id="tab-docs" role="tab" aria-selected="true" aria-controls="docs" onclick="showTab('docs')">01 / Discover</button>
-        <button class="tab" id="tab-request" role="tab" aria-selected="false" aria-controls="request" onclick="showTab('request')">02 / Request a tool</button>
+        <button class="tab" id="tab-portfolio" role="tab" aria-selected="false" aria-controls="portfolio" onclick="showTab('portfolio')">02 / Portfolio</button>
+        <button class="tab" id="tab-request" role="tab" aria-selected="false" aria-controls="request" onclick="showTab('request')">03 / Request a tool</button>
       </nav>
       <button class="nav-cta" onclick="showTab('request')">Start a request ↗</button>
     </div>
@@ -78,6 +79,15 @@
       <div class="actions" style="justify-content:center;margin-top:34px"><button class="btn btn-primary" onclick="showTab('request')">I have a problem to solve ↗</button></div>
     </section>
 
+    <section class="view" id="portfolio" role="tabpanel" aria-labelledby="tab-portfolio">
+      <div class="request-intro">
+        <div class="eyebrow">Selected work and demos</div>
+        <h1>Small tools.<br><span class="gradient">Useful ideas.</span></h1>
+        <p>Explore these Python demo scripts. Open a project to inspect its source; run Python demos on your own computer.</p>
+      </div>
+      <div class="grid3 portfolio-grid" id="portfolioGrid" aria-live="polite"></div>
+    </section>
+
     <section class="view" id="request" role="tabpanel" aria-labelledby="tab-request">
       <div class="request-intro">
         <div class="eyebrow">Your idea starts here</div>
@@ -90,12 +100,12 @@
           <p>A useful request does not need to be perfectly written. A real example is enough to begin.</p>
           <div class="side-item"><div class="icon">01</div><div><strong>Explain the problem</strong><span>What takes too long, keeps going wrong or needs organising?</span></div></div>
           <div class="side-item"><div class="icon">02</div><div><strong>Describe the outcome</strong><span>What would a successful solution do for you?</span></div></div>
-          <div class="side-item"><div class="icon">03</div><div><strong>Continue on WhatsApp</strong><span>Your request opens as a prepared message for you to review and send.</span></div></div>
+          <div class="side-item"><div class="icon">03</div><div><strong>Continue by email</strong><span>Your request opens as a prepared email for you to review and send.</span></div></div>
           <div class="note"><strong>Our approach</strong><br>Understand first. Recommend second. Build only when the solution makes sense.</div>
         </aside>
         <form class="form-panel" id="requestForm">
           <h2>Tool request brief</h2>
-          <p class="sub">Fields marked * are required. Your details will be placed into a WhatsApp message.</p>
+          <p class="sub">Fields marked * are required. Your request will be prepared as an email to yuniqma7@gmail.com.</p>
           <div class="form-grid">
             <div class="field"><label for="category">What kind of help do you need? *</label><select id="category" name="category" required><option value="" disabled selected>Select a category</option><option>Business or office automation</option><option>Data processing and reports</option><option>Stock, sales or customer management</option><option>Computer or IT utility</option><option>Website or web-connected tool</option><option>Personal productivity</option><option>Other / not sure yet</option></select></div>
             <div class="field"><label for="platform">Where should it work?</label><select id="platform" name="platform"><option value="Not sure yet">Not sure yet</option><option>Windows computer</option><option>Linux computer</option><option>Mac computer</option><option>Website / browser</option><option>Android phone</option><option>Multiple platforms</option></select></div>
@@ -105,9 +115,9 @@
             <div class="field"><label for="timing">When do you need it?</label><select id="timing" name="timing"><option>Flexible / discuss together</option><option>As soon as practical</option><option>Within 1–2 weeks</option><option>Within a month</option><option>Just exploring an idea</option></select></div>
             <div class="field full"><label for="extra">Anything else we should know? (optional)</label><input id="extra" name="extra" placeholder="Business type, number of users, existing software, etc." maxlength="500"></div>
           </div>
-          <label class="consent"><input type="checkbox" id="consent" required><span>I understand that this form prepares a message to YUNIQMA SCRIPTBOOT on WhatsApp. I will review and send the message myself. I will not include passwords, payment PINs or sensitive personal data.</span></label>
-          <div class="send-row"><button class="btn btn-primary" type="submit">Prepare WhatsApp request <span>↗</span></button><span class="status" id="formStatus" aria-live="polite">No payment or commitment is required to send an enquiry.</span></div>
-          <div class="form-foot">When you press the button, WhatsApp will open with your request filled in. You must press <strong>Send</strong> inside WhatsApp for us to receive it. If WhatsApp is unavailable, you can copy the prepared message instead.</div>
+          <label class="consent"><input type="checkbox" id="consent" required><span>I understand that this form prepares an email to YUNIQMA SCRIPTBOOT. I will review and send the email myself. I will not include passwords, payment PINs or sensitive personal data.</span></label>
+          <div class="send-row"><button class="btn btn-primary" type="submit">Prepare email request <span>↗</span></button><span class="status" id="formStatus" aria-live="polite">No payment or commitment is required to send an enquiry.</span></div>
+          <div class="form-foot">Your email app will open with your request addressed to <strong>yuniqma7@gmail.com</strong>. Press <strong>Send</strong> in your email app for us to receive it.</div>
         </form>
       </div>
     </section>

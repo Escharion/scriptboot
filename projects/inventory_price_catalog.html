@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b16">
+  <meta name="description" content="A browser preview of an inventory database with item prices.">
+  <title>Inventory &amp; Price Catalog — SCRIPTBOOT Demo</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080a13;
+      --panel: #101522;
+      --line: rgba(173, 195, 235, .14);
+      --text: #f3f6ff;
+      --muted: #9ba8bd;
+      --cyan: #68f0e2;
+      --blue: #7c9cff;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 12% 0%, rgba(65, 104, 210, .2), transparent 38%),
+        radial-gradient(ellipse at 92% 18%, rgba(76, 218, 198, .1), transparent 34%),
+        var(--bg);
+    }
+    a { color: inherit; }
+    .shell { width: min(1050px, calc(100% - 36px)); margin: 0 auto; }
+    header { padding: 22px 0; border-bottom: 1px solid var(--line); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 18px; }
+    .brand { font-size: 12px; font-weight: 850; letter-spacing: .15em; }
+    .back-link { color: var(--cyan); font-size: 13px; font-weight: 750; text-decoration: none; }
+    main { padding: 54px 0 80px; }
+    .eyebrow { color: var(--cyan); font-size: 11px; font-weight: 850; letter-spacing: .18em; text-transform: uppercase; }
+    h1 { margin: 12px 0; font-size: clamp(36px, 6vw, 58px); letter-spacing: -.055em; line-height: 1.04; }
+    .intro { max-width: 700px; color: var(--muted); line-height: 1.75; }
+    .notice { margin: 24px 0; padding: 14px 17px; border: 1px solid rgba(124, 156, 255, .22); border-radius: 14px; color: #c1cde4; background: rgba(124, 156, 255, .06); font-size: 13px; }
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin: 25px 0; }
+    .summary-card { padding: 17px 19px; border: 1px solid var(--line); border-radius: 15px; background: rgba(255,255,255,.03); }
+    .summary-card strong { display: block; font-size: 21px; }
+    .summary-card span { color: var(--muted); font-size: 12px; }
+    .catalog { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: rgba(16, 21, 34, .88); }
+    .toolbar { display: flex; gap: 12px; padding: 16px; border-bottom: 1px solid var(--line); }
+    input, select {
+      min-width: 0;
+      padding: 12px 13px;
+      border: 1px solid rgba(165, 185, 220, .2);
+      border-radius: 10px;
+      color: var(--text);
+      background: #090e19;
+      font: inherit;
+    }
+    input { flex: 1; }
+    select { width: min(230px, 42%); }
+    input:focus, select:focus { outline: 2px solid rgba(104, 240, 226, .4); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; text-align: left; }
+    th, td { padding: 14px 17px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { color: var(--muted); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; }
+    td { font-size: 13px; }
+    td.price { color: var(--cyan); font-weight: 800; }
+    .stock { color: #b6c4da; }
+    tbody tr:last-child td { border-bottom: 0; }
+    .empty { display: none; padding: 30px 16px; color: var(--muted); text-align: center; }
+    .footnote { margin-top: 15px; color: var(--muted); font-size: 11px; line-height: 1.65; }
+    @media (max-width: 620px) {
+      .summary { grid-template-columns: 1fr; }
+      .toolbar { flex-direction: column; }
+      select { width: 100%; }
+      main { padding-top: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell header-inner">
+      <div class="brand">YUNIQMA / SCRIPTBOOT</div>
+      <a class="back-link" href="../index.html">← Back to portfolio</a>
+    </div>
+  </header>
+  <main class="shell">
+    <div class="eyebrow">Interactive browser preview</div>
+    <h1>Inventory &amp; price catalog</h1>
+    <p class="intro">A small example of how a product database can help you find items, check prices and see stock at a glance. Search or filter the sample catalog below.</p>
+    <div class="notice"><strong>Demo data:</strong> These example items, stock counts and prices are for preview only and are not a live store or current quotations.</div>
+    <section class="summary" aria-label="Catalog summary">
+      <div class="summary-card"><strong id="itemCount">0</strong><span>Items shown</span></div>
+      <div class="summary-card"><strong id="categoryCount">0</strong><span>Categories</span></div>
+      <div class="summary-card"><strong id="stockCount">0</strong><span>Units in stock</span></div>
+    </section>
+    <section class="catalog" aria-label="Sample inventory catalog">
+      <div class="toolbar">
+        <input id="search" type="search" placeholder="Search item or category..." aria-label="Search catalog">
+        <select id="categoryFilter" aria-label="Filter by category">
+          <option value="">All categories</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Item</th><th>Category</th><th>Price</th><th>Stock</th></tr></thead>
+          <tbody id="catalogRows"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="emptyState">No items match your search.</div>
+    </section>
+    <p class="footnote">Prices are displayed in Ghana cedis (GH₵). This preview uses a sample in-page dataset; it is not connected to a backend database.</p>
+  </main>
+  <script>
+    const catalog = [
+      { category: 'Accessories', products: [
+        ['Wireless mouse', 85, 18], ['USB keyboard', 140, 12], ['Laptop stand', 190, 7],
+        ['Laptop sleeve — 15 inch', 165, 11], ['Webcam — 1080p', 320, 8],
+        ['Headset with microphone', 245, 14], ['Mouse pad', 45, 30],
+        ['USB-C hub — 6 port', 280, 9], ['Screen cleaning kit', 65, 16],
+        ['Laptop cooling pad', 210, 6]
+      ] },
+      { category: 'Storage', products: [
+        ['USB flash drive — 32 GB', 60, 25], ['USB flash drive — 64 GB', 95, 24],
+        ['USB flash drive — 128 GB', 155, 15], ['External HDD — 1 TB', 620, 7],
+        ['External HDD — 2 TB', 850, 5], ['External SSD — 500 GB', 780, 6],
+        ['External SSD — 1 TB', 1280, 4], ['MicroSD card — 64 GB', 90, 18],
+        ['MicroSD card — 128 GB', 145, 12], ['SD card — 128 GB', 175, 9]
+      ] },
+      { category: 'Cables & adapters', products: [
+        ['HDMI cable — 2 m', 55, 20], ['HDMI cable — 5 m', 110, 10],
+        ['USB-C cable — 1 m', 45, 28], ['USB-C cable — 2 m', 70, 22],
+        ['Lightning cable — 1 m', 65, 18], ['Micro-USB cable — 1 m', 35, 24],
+        ['Ethernet cable — 5 m', 60, 14], ['Ethernet cable — 10 m', 95, 9],
+        ['USB-C to HDMI adapter', 130, 8], ['USB-A to Ethernet adapter', 115, 7]
+      ] },
+      { category: 'Power', products: [
+        ['USB-C charger — 20 W', 120, 15], ['USB-C charger — 65 W', 260, 9],
+        ['Laptop charger — universal', 350, 7], ['Power bank — 10,000 mAh', 240, 13],
+        ['Power bank — 20,000 mAh', 390, 8], ['Surge protector — 4 outlet', 180, 11],
+        ['Extension lead — 5 m', 125, 10], ['Rechargeable AA batteries — 4 pack', 95, 14],
+        ['AA battery — 2 pack', 25, 30], ['UPS — 650 VA', 980, 4]
+      ] },
+      { category: 'Networking', products: [
+        ['Wi-Fi router — N300', 420, 5], ['Wi-Fi router — AC1200', 690, 4],
+        ['Wi-Fi range extender', 360, 6], ['8-port gigabit switch', 480, 5],
+        ['5-port gigabit switch', 290, 8], ['USB Wi-Fi adapter', 110, 12],
+        ['Cat6 Ethernet cable — 1 m', 30, 25], ['Cat6 Ethernet cable — 3 m', 45, 18],
+        ['RJ45 connector — 10 pack', 35, 20], ['Network crimping tool', 160, 4]
+      ] },
+      { category: 'Computer components', products: [
+        ['DDR4 RAM — 8 GB', 390, 6], ['DDR4 RAM — 16 GB', 680, 5],
+        ['DDR4 RAM — 32 GB kit', 1250, 3], ['SATA SSD — 256 GB', 420, 8],
+        ['SATA SSD — 512 GB', 650, 6], ['NVMe SSD — 512 GB', 720, 5],
+        ['NVMe SSD — 1 TB', 1180, 4], ['Desktop power supply — 500 W', 560, 4],
+        ['Case fan — 120 mm', 95, 10], ['Thermal paste — 4 g', 55, 12]
+      ] },
+      { category: 'Office supplies', products: [
+        ['A4 paper — 500 sheets', 85, 20], ['Ballpoint pens — 10 pack', 35, 25],
+        ['Hard-cover notebook', 40, 18], ['Sticky notes — 3 pack', 28, 16],
+        ['Permanent markers — 4 pack', 32, 14], ['Stapler', 48, 9],
+        ['Staples — 1000 pack', 18, 30], ['A4 document folder', 12, 40],
+        ['Clear tape — 3 pack', 22, 20], ['Desk organizer', 75, 7]
+      ] },
+      { category: 'Printers & supplies', products: [
+        ['Wireless inkjet printer', 1850, 3], ['Mono laser printer', 2450, 2],
+        ['Black ink cartridge', 230, 7], ['Tri-colour ink cartridge', 260, 6],
+        ['Laser toner cartridge — black', 420, 5], ['Printer USB cable', 35, 12],
+        ['A4 photo paper — 20 sheets', 55, 10], ['Label paper — 100 sheets', 95, 6],
+        ['Thermal receipt paper — 10 rolls', 120, 8], ['Printer cleaning kit', 85, 5]
+      ] },
+      { category: 'Mobile accessories', products: [
+        ['Phone case — universal', 55, 18], ['Tempered glass screen protector', 35, 25],
+        ['Car phone holder', 80, 9], ['Wireless earbuds', 280, 8],
+        ['Bluetooth speaker — portable', 350, 6], ['Phone tripod', 120, 7],
+        ['Ring light — 10 inch', 210, 5], ['USB-C earphones', 75, 10],
+        ['SIM ejector and cleaning kit', 20, 20], ['Foldable phone stand', 45, 14]
+      ] },
+      { category: 'Software & services', products: [
+        ['Antivirus license — 1 device / 1 year', 180, 20],
+        ['Antivirus license — 3 devices / 1 year', 320, 15],
+        ['Office productivity setup', 250, 10], ['Computer health check', 120, 12],
+        ['Data backup setup', 200, 8], ['Wi-Fi setup service', 180, 8],
+        ['Printer setup service', 100, 10], ['Basic website maintenance', 350, 5],
+        ['File organization service', 150, 8], ['Remote support — 1 hour', 100, 10]
+      ] }
+    ];
+    const items = catalog.flatMap(({ category, products }) =>
+      products.map(([name, price, stock]) => ({ name, category, price, stock }))
+    );
+
+    const currency = new Intl.NumberFormat('en-GH', {
+      style: 'currency',
+      currency: 'GHS',
+      maximumFractionDigits: 2
+    });
+    const search = document.getElementById('search');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const rows = document.getElementById('catalogRows');
+
+    [...new Set(items.map(item => item.category))].sort().forEach(category => {
+      const option = document.createElement('option');
+      option.value = category;
+      option.textContent = category;
+      categoryFilter.append(option);
+    });
+
+    function renderCatalog() {
+      const query = search.value.trim().toLowerCase();
+      const selectedCategory = categoryFilter.value;
+      const visibleItems = items.filter(item => {
+        const matchesText = `${item.name} ${item.category}`.toLowerCase().includes(query);
+        return matchesText && (!selectedCategory || item.category === selectedCategory);
+      });
+
+      rows.replaceChildren();
+      visibleItems.forEach(item => {
+        const row = document.createElement('tr');
+        [item.name, item.category].forEach(value => {
+          const cell = document.createElement('td');
+          cell.textContent = value;
+          row.append(cell);
+        });
+        const priceCell = document.createElement('td');
+        priceCell.className = 'price';
+        priceCell.textContent = currency.format(item.price);
+        row.append(priceCell);
+        const stockCell = document.createElement('td');
+        stockCell.className = 'stock';
+        stockCell.textContent = item.stock.toLocaleString();
+        row.append(stockCell);
+        rows.append(row);
+      });
+
+      document.getElementById('itemCount').textContent = visibleItems.length;
+      document.getElementById('categoryCount').textContent =
+        new Set(visibleItems.map(item => item.category)).size;
+      document.getElementById('stockCount').textContent =
+        visibleItems.reduce((total, item) => total + item.stock, 0).toLocaleString();
+      document.getElementById('emptyState').style.display = visibleItems.length ? 'none' : 'block';
+    }
+
+    search.addEventListener('input', renderCatalog);
+    categoryFilter.addEventListener('change', renderCatalog);
+    renderCatalog();
+  </script>
+</body>
+</html>
